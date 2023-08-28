@@ -1,0 +1,48 @@
+ALGORITHM AnalyzePhrase
+    BEGIN
+        // Step 1: Get input from the user
+        DISPLAY "Enter a sentence ending with a period: "
+        READ phrase
+
+        // Step 2: Calculate the length of the phrase (excluding the final period)
+        length <- 0
+        i <- 1
+        WHILE phrase[i] ? '.' DO
+            length <- length + 1
+            i <- i + 1
+        END WHILE
+
+        // Step 3: Split the phrase into words
+        mots <- ARRAY
+        word <- ""
+        i <- 1
+        WHILE i <= length DO
+            IF phrase[i] ? ' ' THEN
+                word <- word + phrase[i]
+            ELSE
+                mots.ADD(word)
+                word <- ""
+            END IF
+            i <- i + 1
+        END WHILE
+        mots.ADD(word) // Add the last word
+
+        // Step 4: Calculate the number of words
+        nombreMots <- LENGTH(mots)
+
+        // Step 5: Count the number of vowels in the phrase
+        nombreVoyelles <- 0
+        i <- 1
+        WHILE i <= length DO
+            IF "aeiouAEIOU" CONTAINS phrase[i] THEN
+                nombreVoyelles <- nombreVoyelles + 1
+            END IF
+            i <- i + 1
+        END WHILE
+
+        // Step 6: Display the results
+        DISPLAY "Length of the sentence:", length
+        DISPLAY "Number of words:", nombreMots
+        DISPLAY "Number of vowels:", nombreVoyelles
+    END
+END ALGORITHM
